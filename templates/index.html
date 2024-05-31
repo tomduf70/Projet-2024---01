@@ -111,7 +111,7 @@
             // Décision pour le choix de la boite
             // Envoi de l'étiquette au serveur Flask si elle est différente
             if (etiquetteActive !== derniereEtiquetteEnvoyee) {
-                fetch('toggle', {
+                fetch('selectBoite', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

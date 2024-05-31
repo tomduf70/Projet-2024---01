@@ -19,7 +19,7 @@ def load_labels():
     labels_dict = {label: i for i, label in enumerate(labels)}
     return jsonify({'status': 'labels loaded', 'labels': labels_dict})
 
-@app.route('/toggle', methods=['POST'])
+@app.route('/selectBoite', methods=['POST'])
 def toggle_gpio():
     data = request.json
     label = data.get('label')
