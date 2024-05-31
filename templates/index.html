@@ -102,7 +102,7 @@
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
                 // Projet SI : si l'étiquette qui fait 100% n'est pas l'étiquette active
-                if (prediction[i].className != etiquetteActive && prediction[i].probability.toFixed(2) == 1.00) {
+                if (prediction[i].probability.toFixed(2) == 1.00 && prediction[i].className != etiquetteActive) {
                     etiquetteActive = prediction[i].className
                     console.log("Nouvelle classe active : " + etiquetteActive)
                 }
@@ -116,7 +116,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ label: etiquetteActive })  // Remplacez par l'�tiquette correspondante
+                    body: JSON.stringify({ label: etiquetteActive })  // Remplacez par l'étiquette correspondante
                 })
                     .then(response => response.json())
                     .then(data => {
