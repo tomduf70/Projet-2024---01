@@ -14,7 +14,7 @@
     <h3>Liste des modèles</h3>
     <ul>
         {% for item in list_id_teachable %}
-            <li>{{ item }}</li>
+        <li><a href="https://teachablemachine.withgoogle.com/models/{{ item }}">{{ item }}</a></li>
         {% endfor %}
     </ul>
     <h3>Envoi d'un modèle non listé</h3>
