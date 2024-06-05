@@ -19,14 +19,16 @@
     </ul>
     <h3>Envoi d'un modèle non listé</h3>
 
-    <form action="/teachable" method="POST">
+    <form action="/" method="POST">
         <label for="id_teachable">id du modèle sur teachable machine</label><br>
         <input id="id_teachable" type="text" name="id_teachable">
         <div>
             <button type="submit">Envoyer</button>
         </div>
     </form>
+
     <h2>Modèle actif</h2>
+    <h3>{{ modele_teachable_actif }}</h3>
     <button type="button" onclick="init()">Démarrer la caméra</button>
     <div id="webcam-container"></div>
     <div id="label-container"></div>

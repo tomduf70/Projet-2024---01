@@ -10,7 +10,7 @@ GPIO.setwarnings(False)
 # Déclaration des constantes
 DELAI = 0.000002  
 MICROSTEP = 32
-NB_CAISSES = 4
+NB_CAISSES = 4  # Modifié lors du choix du modèle teachable
 Z_PIGNON = 18
 MODULE = 1
 DISTANCE_CREMA = 120      # course maximale de la glissière / crémaillère avec marge de sécuerité
@@ -35,6 +35,7 @@ GPIO.setup(step_pin, GPIO.OUT)
 
 # Variables globales
 num_caisse_actuelle = 0
+modele_teachable_actif = "FXJoVB2HU/"
 
 #Fonction de déplacement du moteur
 def move_stepper(direc,steps, delay):
@@ -88,18 +89,16 @@ def read_file_to_list(file_path):
 
 # Utilisation de la fonction pour lire le fichier id_teachable.txt
 file_path = 'id_teachable.txt'
-list_id_teachable = read_file_to_list(file_path)
+
 
 # Récupération d'un nouvel id
 def write_to_file(file_path, text):
     try:
         with open(file_path, 'a') as file:
-            file.write(text + '\n')
+            file.write('\n' + text)
     except Exception as e:
         print(f"Une erreur est survenue lors de l'écriture dans le fichier : {e}")
 
-# Afficher la liste résultante
-print(list_id_teachable)
 
 
 app = Flask(__name__)
@@ -112,8 +111,10 @@ GPIO.setup(17, GPIO.OUT)  # Remplacez 17 par le numéro de broche que vous utili
 def home():
     if request.method == 'POST':
         new_id = request.form['id_teachable']
-        write_to_file('id_teachable.txt', new_id)    
-    return render_template('index.html', list_id_teachable=list_id_teachable )
+        write_to_file('id_teachable.txt', new_id)
+    # Lecture de la liste des fichiers
+    list_id_teachable = read_file_to_list(file_path)   
+    return render_template('index.html', list_id_teachable=list_id_teachable, modele_teachable_actif=modele_teachable_actif )
 
 @app.route('/load_labels', methods=['POST'])
 def load_labels():
