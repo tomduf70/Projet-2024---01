@@ -12,6 +12,11 @@
     <h1>Projet SI 2024</h1>
     <h2>Modèles Teachable Machine</h2>
     <h3>Liste des modèles</h3>
+    <ul>
+        {% for item in list_id_teachable %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
     <h3>Envoi d'un modèle non listé</h3>
 
     <form action="/teachable" method="POST">
