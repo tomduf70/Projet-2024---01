@@ -90,6 +90,14 @@ def read_file_to_list(file_path):
 file_path = 'id_teachable.txt'
 list_id_teachable = read_file_to_list(file_path)
 
+# Récupération d'un nouvel id
+def write_to_file(file_path, text):
+    try:
+        with open(file_path, 'a') as file:
+            file.write(text + '\n')
+    except Exception as e:
+        print(f"Une erreur est survenue lors de l'écriture dans le fichier : {e}")
+
 # Afficher la liste résultante
 print(list_id_teachable)
 
@@ -100,8 +108,11 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)  # Remplacez 17 par le numéro de broche que vous utilisez
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        new_id = request.form['id_teachable']
+        write_to_file('id_teachable.txt', new_id)    
     return render_template('index.html', list_id_teachable=list_id_teachable )
 
 @app.route('/load_labels', methods=['POST'])
