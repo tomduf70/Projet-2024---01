@@ -8,7 +8,7 @@ import math
 GPIO.setwarnings(False)
 
 # Déclaration des constantes
-DELAI = 0.000002
+DELAI = 0.000002  
 MICROSTEP = 32
 NB_CAISSES = 4
 Z_PIGNON = 18
