@@ -71,6 +71,29 @@ def positionnerCaisse(num_caisse_selectionnee):
     num_caisse_actuelle = num_caisse_selectionnee
     return True
 
+# Fonction de récupération de la liste des id teachable
+def read_file_to_list(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            # Enlever les caractères de nouvelle ligne à la fin de chaque ligne
+            lines = [line.strip() for line in lines]
+        return lines
+    except FileNotFoundError:
+        print(f"Le fichier {file_path} n'a pas été trouvé.")
+        return []
+    except Exception as e:
+        print(f"Une erreur est survenue : {e}")
+        return []
+
+# Utilisation de la fonction pour lire le fichier id_teachable.txt
+file_path = 'id_teachable.txt'
+list_id_teachable = read_file_to_list(file_path)
+
+# Afficher la liste résultante
+print(list_id_teachable)
+
+
 app = Flask(__name__)
 
 # Configuration de la broche GPIO
@@ -79,7 +102,7 @@ GPIO.setup(17, GPIO.OUT)  # Remplacez 17 par le numéro de broche que vous utili
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', list_id_teachable=list_id_teachable )
 
 @app.route('/load_labels', methods=['POST'])
 def load_labels():
