@@ -36,6 +36,7 @@ GPIO.setup(step_pin, GPIO.OUT)
 # Variables globales
 num_caisse_actuelle = 0
 modele_teachable_actif = "FXJoVB2HU/"
+list_id_teachable = []
 
 #Fonction de déplacement du moteur
 def move_stepper(direc,steps, delay):
@@ -109,6 +110,10 @@ GPIO.setup(17, GPIO.OUT)  # Remplacez 17 par le numéro de broche que vous utili
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    global list_id_teachable, modele_teachable_actif
+    id = request.args.get('id')
+    if id is not None:
+        modele_teachable_actif = id
     if request.method == 'POST':
         new_id = request.form['id_teachable']
         write_to_file('id_teachable.txt', new_id)
@@ -133,9 +138,7 @@ def toggle_gpio():
 
     # Positionnement de la caisse correspondant au label
     positionnerCaisse(numCaisse)
-    return jsonify({'status': f'Caisse {numCaisse} positionnée'})
-
-
+    return jsonify({'status': f'Caisse {numCaisse} positionnée'})  
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
