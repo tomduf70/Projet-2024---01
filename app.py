@@ -35,7 +35,7 @@ GPIO.setup(step_pin, GPIO.OUT)
 
 # Variables globales
 num_caisse_actuelle = 0
-modele_teachable_actif = "FXJoVB2HU/"
+modele_teachable_actif = "FXJoVB2HU"
 list_id_teachable = []
 
 #Fonction de déplacement du moteur
