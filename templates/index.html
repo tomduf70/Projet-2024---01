@@ -4,35 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Minified version -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <title>Projet SI 2024 - 01</title>
 </head>
 
 <body>
 
     <h1>Projet SI 2024</h1>
     <h2>Modèles Teachable Machine</h2>
-    <h3>Liste des modèles</h3>
-    <ul>
-        {% for item in list_id_teachable %}
-        <li><a href="https://teachablemachine.withgoogle.com/models/{{ item }}" target="_blank">{{ item }}</a> - 
-            {% if modele_teachable_actif == item %}Actif {% else %} <a href="/?id={{ item }}">Activer</a>{% endif %}</li>
-        {% endfor %}
-    </ul>
-    <h3>Envoi d'un modèle non listé</h3>
+    <details>
+        <summary>Liste des modèles</summary>
+        <ul>
+            {% for item in list_id_teachable %}
+            <li><a href="https://teachablemachine.withgoogle.com/models/{{ item }}" target="_blank">{{ item }}</a> -
+                {% if modele_teachable_actif == item %}Actif {% else %} <a href="/?id={{ item }}">Activer</a>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="/" method="POST">
+            <p><input placeholder="id du modèle sur teachable machine" id="id_teachable" type="text"
+                    name="id_teachable">
+            </p>
+            <p>
+                <button type="submit">Envoyer</button>
+            </p>
+        </form>
+    </details>
+    <article>
+        <h4>Modèle actif</h4>
+        <p><code>{{ modele_teachable_actif }}</code></p>
+    </article>
 
-    <form action="/" method="POST">
-        <label for="id_teachable">id du modèle sur teachable machine</label><br>
-        <input id="id_teachable" type="text" name="id_teachable">
-        <div>
-            <button type="submit">Envoyer</button>
-        </div>
-    </form>
+    <h2>Reconnaissance et tri d'objets</h2>
 
-    <h2>Modèle actif</h2>
-    <h3>{{ modele_teachable_actif }}</h3>
-    <button type="button" onclick="init()">Démarrer la caméra</button>
+    <p>
+        <button type="button" onclick="init()">Démarrer la caméra</button>
+    </p>
     <div id="webcam-container"></div>
     <div id="label-container"></div>
+    <h2>Contrôle manuel du moteur</h2>
+    <form action="/" method="POST">
+        <p>
+            <input placeholder="nombre de pas" id="steps" type="text" name="steps" size="4">
+        </p>
+        <p>
+            <label>Direction</label>
+            <label><input checked="checked" name="type" type="radio" value="sales" /> Gauche</label>
+            <label><input name="type" type="radio" value="support" /> Droite</label>
+        </p>
+        <p>
+            <button type="submit">Envoyer</button>
+        </p>
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
