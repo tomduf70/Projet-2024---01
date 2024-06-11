@@ -13,7 +13,7 @@ MICROSTEP = 32
 NB_CAISSES = 5  # Modifié lors du choix du modèle teachable
 Z_PIGNON = 24
 MODULE = 1
-DISTANCE_CREMA = 240      # course maximale de la glissière / crémaillère avec marge de sécuerité
+DISTANCE_CREMA = 120      # course maximale de la glissière / crémaillère avec marge de sécuerité
 
 PAS_ENTRE_CAISSES = int((200 * DISTANCE_CREMA * MICROSTEP)/ (NB_CAISSES* math.pi * MODULE * Z_PIGNON))
 print(f"Déplacement pour une caisse : {PAS_ENTRE_CAISSES} steps")
@@ -56,7 +56,6 @@ def stop_stepper():
 def positionnerCaisse(num_caisse_selectionnee):
     # Récupération de la variable globale
     global num_caisse_actuelle
-
     # Calcul du nombre de pas relatif à la position actuelle
     nb_pas_relatifs = abs(num_caisse_actuelle - num_caisse_selectionnee) * PAS_ENTRE_CAISSES
 
