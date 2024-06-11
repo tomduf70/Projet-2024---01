@@ -8,12 +8,12 @@ import math
 GPIO.setwarnings(False)
 
 # Déclaration des constantes
-DELAI = 0.000002  
+DELAI = 0.0002  
 MICROSTEP = 32
-NB_CAISSES = 4  # Modifié lors du choix du modèle teachable
-Z_PIGNON = 18
+NB_CAISSES = 5  # Modifié lors du choix du modèle teachable
+Z_PIGNON = 24
 MODULE = 1
-DISTANCE_CREMA = 120      # course maximale de la glissière / crémaillère avec marge de sécuerité
+DISTANCE_CREMA = 240      # course maximale de la glissière / crémaillère avec marge de sécuerité
 
 PAS_ENTRE_CAISSES = int((200 * DISTANCE_CREMA * MICROSTEP)/ (NB_CAISSES* math.pi * MODULE * Z_PIGNON))
 print(f"Déplacement pour une caisse : {PAS_ENTRE_CAISSES} steps")

@@ -13,7 +13,7 @@ MICROSTEP = 32
 NB_CAISSES = 4  # Modifié lors du choix du modèle teachable
 Z_PIGNON = 18
 MODULE = 1
-DISTANCE_CREMA = 120      # course maximale de la glissière / crémaillère avec marge de sécuerité
+DISTANCE_CREMA = 240      # course maximale de la glissière / crémaillère avec marge de sécuerité
 
 PAS_ENTRE_CAISSES = int((200 * DISTANCE_CREMA * MICROSTEP)/ (NB_CAISSES* math.pi * MODULE * Z_PIGNON))
 print(f"Déplacement pour une caisse : {PAS_ENTRE_CAISSES} steps")
@@ -34,7 +34,7 @@ GPIO.setup(ena_pin, GPIO.OUT)
 GPIO.setup(step_pin, GPIO.OUT)
 
 # Variables globales
-num_caisse_actuelle = 0
+
 modele_teachable_actif = "rz5ffTQqQ"
 list_id_teachable = [] 
 
@@ -73,6 +73,7 @@ def positionnerCaisse(num_caisse_selectionnee):
     num_caisse_actuelle = num_caisse_selectionnee
     return True
 
-
-numCaisse = 0
+num_caisse_actuelle = 0
+numCaisse = 2
 positionnerCaisse(numCaisse)
+print(num_caisse_actuelle)
