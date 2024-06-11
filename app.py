@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 
 # Déclaration des constantes
 DELAI = 0.0002  
-MICROSTEP = 32
+MICROSTEP = 1
 NB_CAISSES = 5  # Modifié lors du choix du modèle teachable
 Z_PIGNON = 24
 MODULE = 1
@@ -41,7 +41,6 @@ list_id_teachable = []
 #Fonction de déplacement du moteur
 def move_stepper(direc,steps, delay):
     GPIO.output(dir_pin, direc)
-    steps = abs(steps)
     for i in range(steps):
         GPIO.output(step_pin, GPIO.HIGH)
         time.sleep(delay)
